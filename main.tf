@@ -15,17 +15,6 @@ filter {
     name   = "tag:Name"
     values = ["${var.aws_name} PRIVATE A"] # insert value here
   }
-
-  #values = ["demo-vpc PRIVATE A"]
-}
-
-resource "aws_db_subnet_group" "default" {
- name       = "my_sub_grp"
- subnet_ids = data.aws_subnet_ids.aws_db_pri_subnet.ids
-
- tags = {
-   Name = "private subnet group"
-  }
 }
 
 #####main_variables_for_rds_setup

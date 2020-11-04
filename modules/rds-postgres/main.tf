@@ -9,8 +9,7 @@ resource "aws_db_instance" "dev-rds" {
   username             = var.db_user
   password             = var.db_password
   skip_final_snapshot  = true
-  #aws_db_subnet_group  = var.
-  #parameter_group_name = var.db_para_group
+  
 }
 
 
