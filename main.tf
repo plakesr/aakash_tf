@@ -9,19 +9,25 @@ filter {
   }
 }
 
-data "aws_subnet_ids" "aws_db_pri_subnet" {
+data "aws_subnet" "private_A" {
 vpc_id = data.aws_vpc.demo.id
 filter {
     name   = "tag:Name"
     values = ["${var.aws_name} PRIVATE A"] # insert value here
   }
+}
 
-  #values = ["demo-vpc PRIVATE A"]
+data "aws_subnet" "private_B" {
+vpc_id = data.aws_vpc.demo.id
+filter {
+    name   = "tag:Name"
+    values = ["demo-vpc PRIVATE B"] #insert value here "^p.*11$" ["${var.aws_name}" "PRIVATE" "*"]
+  }
 }
 
 resource "aws_db_subnet_group" "default" {
  name       = "my_sub_grp"
- subnet_ids = data.aws_subnet_ids.aws_db_pri_subnet.ids
+ subnet_ids = [data.aws_subnet.private_A.id, data.aws_subnet.private_B.id] #tolist(concat("${data.aws_subnet.private_A.id}", "${data.aws_subnet.private_B.id}")) 
 
  tags = {
    Name = "private subnet group"
@@ -58,11 +64,3 @@ module "rds-postgres" {
     
 }
 
-#resource "aws_db_subnet_group" "default" {
-#  name       = "main"
-#  subnet_ids = ["${var.aws_name} Private A"]
-
- # tags = {
- #   Name = "private subnet group"
-  #}
-#}
