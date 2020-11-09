@@ -12,6 +12,12 @@ variable "storage_type" {
   default = "gp2"
 }
 
+variable "storage_encrypted" {
+  description = "Specifies whether the DB instance is encrypted"
+  type        = bool
+  default     = true
+}
+
 variable "db_engine" {
   default = "aurora-postgresql"
 }
@@ -50,3 +56,9 @@ variable "db_vpc" {
 type = string
 default = "data.aws_vpc.demo.id"
 }
+
+#variable "db_subnet_group_name" {
+#  description = "Name of DB subnet group"
+#  type        = string
+#  default     = ""
+#}
