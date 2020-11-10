@@ -5,6 +5,7 @@ provider "aws" {
 ##########-Getting-VPC/Subnets/-Details 
 locals {
     private_subnet = [for subnet_info in data.aws_subnet.private_subnet: subnet_info.id if split(" ",subnet_info.tags.Name)[1] == "PRIVATE"]
+    pub_cidr = [for subnet_info in data.aws_subnet.private_subnet: subnet_info.cidr_block if split(" ",subnet_info.tags.Name)[1] == "PUBLIC"]
 }
 
 
@@ -77,6 +78,6 @@ module "sg2" {
   tcp_ports               = "5432"
   ref_security_groups_ids = [module.sg1.aws_security_group_default]
   security_group_name     = "rds"
-  cidrs_rds               = ["10.0.3.0/24"]
+  cidrs_rds               = local.pub_cidr
   vpc_id                  = data.aws_vpc.demo.id
 }
