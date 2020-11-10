@@ -1,4 +1,4 @@
-/*
+
 resource "aws_db_instance" "dev-rds" {
   identifier           = var.db_identifier
   allocated_storage    = var.storage_size
@@ -11,12 +11,15 @@ resource "aws_db_instance" "dev-rds" {
   username             = var.db_user
   password             = var.db_password
   skip_final_snapshot  = true
-
-  #db_subnet_group_name   = var.db_subnet_group_name
-  #aws_db_subnet_group  = var.
-  #parameter_group_name = var.db_para_group
+  multi_az             = true
+  db_subnet_group_name = aws_db_subnet_group.rds-instance-subnets.name
+  vpc_security_group_ids = var.vpc-security-group-ids
 }
-*/
+
+resource "aws_db_subnet_group" "rds-instance-subnets" {
+  name                 = var.db_name
+  subnet_ids           = var.subnet_ids
+}
 
 
 
