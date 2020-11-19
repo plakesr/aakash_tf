@@ -16,3 +16,9 @@ db_password       = "password123"
 db_para_group     = "default"
 db_identifier     = "demo-db"
 #db_subnet_group_name = "db_subnet_group_name"
+
+######## Variable for Lambda
+filename = "hello.zip"
+function_name = "dev_lambda"
+memory_size = "128"
+tagname = "dev_mgm_lambda"

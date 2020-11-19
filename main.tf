@@ -82,8 +82,17 @@ module "sg2" {
   vpc_id                  = data.aws_vpc.demo.id
 }
 
-######################
+######## Variable for Lambda
+variable "filename" {}
+variable "function_name" {}
+variable "memory_size" {}
+variable "tagname" {}
+######### module for Lambda###
 
-module "lambda_test"{
-  source = "./modules/lambda"
+module "mgm_lambda_module"{
+  source = "./lambda"
+  filename      = var.filename
+  function_name = var.function_name
+  memory_size   = var.memory_size
+  tagname = var.tagname
 }
