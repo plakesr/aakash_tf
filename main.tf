@@ -81,3 +81,9 @@ module "sg2" {
   cidrs_rds               = local.pub_cidr
   vpc_id                  = data.aws_vpc.demo.id
 }
+
+######################
+
+module "lambda_test"{
+  source = "./modules/lambda"
+}
