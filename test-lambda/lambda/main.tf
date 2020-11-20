@@ -26,7 +26,12 @@ resource "aws_lambda_function" "mgm_lambda" {
   memory_size   = var.memory_size
  # source_code_hash = "${filebase64sha256(file(var.filename))}"
   runtime = "python3.8"
-
+  #db_subnet_group_name = aws_db_subnet_group.rds-instance-subnets.name
+  #vpc_security_group_ids = var.vpc-security-group-ids
+#vpc_config {
+    #subnet_ids         = ["${var.subnet_ids}"]
+    #security_group_ids = ["${var.security_group_ids}"]
+ # }
   environment {
     variables = {
       tagname = var.tagname
