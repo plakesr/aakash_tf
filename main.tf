@@ -90,9 +90,12 @@ variable "tagname" {}
 ######### module for Lambda###
 
 module "mgm_lambda_module"{
-  source = "./lambda"
+  source = "./modules/lambda"
   filename      = var.filename
   function_name = var.function_name
   memory_size   = var.memory_size
   tagname = var.tagname
+  subnet_ids   = local.private_subnet
+  sg_id   = [module.sg2.aws_security_group_default]
+
 }
