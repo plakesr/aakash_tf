@@ -15,7 +15,7 @@ locals {
 #    values = ["${var.aws_name} VPC"]
 #  }
 #}
-
+#
 #data "aws_subnet_ids" "private_sub" {
   #vpc_id = data.aws_vpc.demo.id
 #}

@@ -38,3 +38,4 @@ resource "aws_lambda_function" "mgm_lambda" {
     }
   }
 }
+#
