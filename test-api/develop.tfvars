@@ -1,2 +1,0 @@
-project = "mgm"
-environment = "dev"
