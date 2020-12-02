@@ -6,6 +6,45 @@ data "aws_caller_identity" "current" {}
 
 data "aws_canonical_user_id" "current" {}
 
+#Local Vars 
+variable "project" {}
+variable "environment" {}
+variable "backend_allowed_cidrs" {}
+variable "backend_lb_allowed_cidrs" {}
+variable "allow_methods" {}
+variable "cache_methods" {}
+variable "static_s3_expiration_days" {}
+variable "s3_acl_bucket" {}
+#variable "vpc_id" {}
+variable "deregistration_delay" {}
+variable "health_check_path" {}
+variable "public_subnet_ids" {}
+variable "region" {}
+variable "certificate_arn_no" {}
+variable "ecs_backend_desired_count" {}
+variable "ecs_launch_type" {}
+variable "backend_memory" {}
+variable "backend_cpu" {}
+variable "backend_container_port" {}
+variable "ecs_backend_scheduling_strategy" {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##########-Getting-VPC/Subnets/-Details 
 locals {
   private_subnet = [for subnet_info in data.aws_subnet.private_subnet : subnet_info.id if split(" ", subnet_info.tags.Name)[1] == "PRIVATE"]
