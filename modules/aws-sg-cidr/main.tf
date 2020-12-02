@@ -20,7 +20,8 @@ resource "aws_security_group_rule" "tcp" {
   from_port         = split(",", var.tcp_ports)[count.index]
   to_port           = split(",", var.tcp_ports)[count.index]
   protocol          = "tcp"
-  cidr_blocks       =  var.cidrs
+  #cidr_blocks       =  var.cidrs
+  backend_allowed_cidrs             = var.backend_allowed_cidrs
   description       = ""
   security_group_id = aws_security_group.default.id
 }
@@ -31,7 +32,8 @@ resource "aws_security_group_rule" "udp" {
   from_port         = split(",", var.udp_ports)[count.index]
   to_port           = split(",", var.udp_ports)[count.index]
   protocol          = "udp"
-  cidr_blocks       = var.cidrs
+  #cidr_blocks       = var.cidrs
+  backend_allowed_cidrs             = var.backend_allowed_cidrs
   description       = ""
   security_group_id = aws_security_group.default.id
 }

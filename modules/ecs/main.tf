@@ -23,11 +23,11 @@ data "template_file" "ecs_backend_template" {
   template = file("modules/ECS/task-definitions/backend.json")
 
   vars = {
-    account_id = var.account_id
+    #account_id = var.account_id
     project = var.project
-    region = var.region
-    backend_ecr_repo = var.backend_ecr_repo
-    backend_image_tag = var.backend_image_tag
+    #region = var.region
+    #backend_ecr_repo = var.backend_ecr_repo
+    #backend_image_tag = var.backend_image_tag
     backend_memory = var.backend_memory
     backend_cpu = var.backend_cpu
     backend_container_port = var.backend_container_port
@@ -62,8 +62,10 @@ resource "aws_ecs_service" "application_ecs_backend_service" {
   desired_count       = var.ecs_backend_desired_count
 
   network_configuration {
-    security_groups  = [var.backend_security_group]
-    subnets          = var.private_subnet_ids
+    #security_groups  = [var.backend_security_group]
+    security_groups  = [var.sg1]
+    #subnets          = var.private_subnet_ids
+    subnet_ids             = local.private_subnet
     assign_public_ip = false
   }
 

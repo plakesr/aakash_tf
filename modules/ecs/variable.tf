@@ -11,26 +11,26 @@ variable "common_tags" {
   type = map
 }
 
-variable "account_id" {
-  description = "aws account id"
-}
+#variable "account_id" {
+#  description = "aws account id"
+#}
 
-variable "region" {
-  description = "aws region"
-}
+#variable "region" {
+#  description = "aws region"
+#}
 
-variable "private_subnet_ids" {
-  description = "vpc private subnet ids"
-  type = list
-}
+#variable "private_subnet_ids" {
+#  description = "vpc private subnet ids"
+#  type = list
+#}
 
-variable "backend_ecr_repo" {
-  description = "backend ecr repo"
-}
+#variable "backend_ecr_repo" {
+#  description = "backend ecr repo"
+#}
 
-variable "backend_image_tag" {
-  description = "backend image ecr tag"
-}
+#variable "backend_image_tag" {
+#  description = "backend image ecr tag"
+#}
 
 variable "backend_memory" {
   description = "backend container memory"
@@ -52,7 +52,7 @@ variable "ecs_backend_scheduling_strategy" {
   description = "backend service scheduling strategy"
 }
 
-variable "backend_security_group" {
+variable "sg1" {
   description = "backend security group id"
 }
 
@@ -68,4 +68,14 @@ variable "ecs_backend_role_arn" {
 
 variable "backend_lb_target_group_arn" {
   description = "baclend load balancer target group arn"
+}
+
+variable "subnet_ids" {
+  description = "A list of VPC Subnet IDs to launch in"
+  type        = list(string)
+  default     = []
+}
+
+variable "vpc-security-group-ids" {
+  default = ""
 }
