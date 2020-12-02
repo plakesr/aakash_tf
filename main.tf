@@ -178,8 +178,8 @@ module "LoadBalancer" {
   source                            = "./modules/alb/"
   project                           = var.project
   environment                       = var.environment
-  vpc_id                            = var.vpc_id
-  frontend_lb_sg_id                 = [module.Security.backend_lb_sg_id]
+  vpc_id                            = data.aws_vpc.demo.id
+  frontend_lb_sg_id                 = [module.sg1.backend_lb_sg_id]
   deregistration_delay              = var.deregistration_delay
   health_check_path                 = var.health_check_path
   public_subnet_ids                 = var.public_subnet_ids
@@ -199,14 +199,14 @@ module "ECS" {
   #region                           = var.region
   ecs_backend_desired_count        = var.ecs_backend_desired_count
   ecs_launch_type                  = var.ecs_launch_type
-  ecs_backend_role_arn             = module.sg1.backend_role_arn
+  ecs_backend_role_arn             = [module.sg1.backend_role_arn]
   #private_subnet_ids               = var.private_subnet_ids
   subnet_ids             = local.private_subnet
   #backend_ecr_repo                 = var.backend_ecr_repo
   #backend_image_tag                = var.backend_image_tag
   backend_memory                   = var.backend_memory
   backend_cpu                      = var.backend_cpu
-  backend_lb_target_group_arn      = module.LoadBalancer.alb_target_group_arn
+  backend_lb_target_group_arn      = [module.LoadBalancer.alb_target_group_arn]
   backend_container_port           = var.backend_container_port
   ecs_backend_scheduling_strategy  = var.ecs_backend_scheduling_strategy
   sg1           = module.sg1
